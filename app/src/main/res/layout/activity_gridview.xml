@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="首页应用:" />
+
+        <com.pdk.pdkgiko.widegt.DragGridView
+            android:id="@+id/grid_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:horizontalSpacing="5dp"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp" />
+
+        <TextView
+            android:id="@+id/tv_editor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:text="编辑"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="我的全部应用:" />
+        <GridView
+            android:id="@+id/grid_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:horizontalSpacing="5dp"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
