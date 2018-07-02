@@ -1,15 +1,14 @@
 package com.pdk.pdkgiko.activity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.pdk.pdkgiko.R;
-import com.pdk.pdkgiko.adapter.GridAdapter;
-import com.pdk.pdkgiko.adapter.GridAllAdapter;
+import com.pdk.pdkgiko.adapter.GridChildAdapter;
+import com.pdk.pdkgiko.adapter.GridGroupAdapter;
 import com.pdk.pdkgiko.base.BaseActivity;
+import com.pdk.pdkgiko.bean.GroupAppBean;
 import com.pdk.pdkgiko.widegt.DragGridView;
 
 import java.util.ArrayList;
@@ -20,14 +19,17 @@ import java.util.List;
  * Created by Administrator on 2018/6/8.
  */
 
-public class GridActivity extends BaseActivity {
+public class GridActivity extends BaseActivity implements GridGroupAdapter.DataChangeListener, GridChildAdapter.GroupAppStatusChangeListener {
     private DragGridView mGridView;
     private GridView mGridViewAll;
     private TextView mTextView;
-    private List<String> childList;
-    private List<String> groupList;
-    private GridAdapter gridAdapter;
-    private GridAllAdapter gridAllAdapter;
+    //    private List<String> childList;
+//    private List<String> groupList;
+    private List<GroupAppBean.AppBean> childList;
+    private List<GroupAppBean.AppBean> groupList;
+    //    private List<GroupAppBean.AppBean> appBeanList;
+    private GridChildAdapter gridChildAdapter;
+    private GridGroupAdapter gridGroupAdapter;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -42,15 +44,21 @@ public class GridActivity extends BaseActivity {
         groupList = new ArrayList<>();
         childList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            groupList.add("item" + i);
+
         }
         for (int i = 0; i < 10; i++) {
-            childList.add("item" + i);
+//            groupList.add("item" + i);
+            groupList.add(new GroupAppBean.AppBean(false, "item" + i));
         }
-        gridAdapter = new GridAdapter(this, childList);
-        gridAllAdapter = new GridAllAdapter(this, groupList);
-        mGridView.setAdapter(gridAdapter);
-        mGridViewAll.setAdapter(gridAllAdapter);
+//        for (int i = 0; i < 10; i++) {
+//            childList.add("item" + i);
+//        }
+        gridChildAdapter = new GridChildAdapter(this, childList);
+        gridGroupAdapter = new GridGroupAdapter(this, groupList, childList);
+        mGridView.setAdapter(gridChildAdapter);
+        mGridViewAll.setAdapter(gridGroupAdapter);
+        gridChildAdapter.setAppStatusChangeListener(this);
+        gridGroupAdapter.setmDataChangeListener(this);
         mGridView.setOnItemChanageListener(new DragGridView.OnItemChanageListener() {
             @Override
             public void onChange(int from, int to) {
@@ -63,22 +71,35 @@ public class GridActivity extends BaseActivity {
                         Collections.swap(childList, i, i - 1);
                     }
                 }
-                gridAdapter.notifyDataSetChanged();
+                gridChildAdapter.notifyDataSetChanged();
             }
         });
 
-//        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (position == parent.getChildCount() - 1) {
-//                    addDatas();
-//                }
-//            }
-//        });
     }
 
-    public void addDatas() {
-        childList.add("item");
-        gridAdapter.notifyDataSetChanged();
+
+    @Override
+    public void addChildData(int position, GroupAppBean.AppBean data) {
+        childList.add(childList.size(), data);
+        gridChildAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void removeChildData(int position, GroupAppBean.AppBean data) {
+        childList.remove(data);
+        gridChildAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void appStatusChange(boolean isChange, GroupAppBean.AppBean data) {
+        if (isChange) {
+            for (int i = 0; i < groupList.size(); i++) {
+                if (groupList.get(i) == data) {
+                    groupList.get(i).setInclude(false);
+                    gridGroupAdapter.notifyDataSetChanged();
+                }
+            }
+        }
     }
 }

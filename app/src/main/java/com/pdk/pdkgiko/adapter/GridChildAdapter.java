@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pdk.pdkgiko.R;
+import com.pdk.pdkgiko.bean.GroupAppBean;
 
 import java.util.List;
 
@@ -15,14 +16,17 @@ import java.util.List;
  * Created by Administrator on 2018/6/8.
  */
 
-public class GridAdapter extends BaseAdapter {
+public class GridChildAdapter extends BaseAdapter {
     private Context mContext;
-    private List<String> stringList;
-    private boolean isShowIv_;
-
-    public GridAdapter(Context context, List<String> list) {
+    private List<GroupAppBean.AppBean> stringList;
+    private GroupAppStatusChangeListener appStatusChangeListener;
+    public GridChildAdapter(Context context, List<GroupAppBean.AppBean> list) {
         this.mContext = context;
         this.stringList = list;
+    }
+
+    public void setAppStatusChangeListener(GroupAppStatusChangeListener appStatusChangeListener) {
+        this.appStatusChangeListener = appStatusChangeListener;
     }
 
     @Override
@@ -53,13 +57,17 @@ public class GridAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_content.setText(stringList.get(position));
+        viewHolder.tv_content.setText(stringList.get(position).getAppName());
         viewHolder.iv_content.setBackgroundResource(R.mipmap.ic_launcher);
         viewHolder.iv_.setVisibility(View.VISIBLE);
         viewHolder.iv_.setImageResource(R.mipmap.ic_remove);
         viewHolder.iv_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (appStatusChangeListener==null) {
+                    return;
+                }
+                appStatusChangeListener.appStatusChange(true,stringList.get(position));
                 stringList.remove(position);
                 notifyDataSetChanged();
             }
@@ -73,9 +81,8 @@ public class GridAdapter extends BaseAdapter {
         TextView tv_content;
 
     }
-
-    public void setIsShowIv_(boolean isShowIv) {
-        this.isShowIv_ = isShowIv;
-        notifyDataSetChanged();
+    public interface GroupAppStatusChangeListener{
+        void appStatusChange(boolean isChange,GroupAppBean.AppBean data);
     }
+
 }

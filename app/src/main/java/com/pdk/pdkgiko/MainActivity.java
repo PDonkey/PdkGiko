@@ -13,6 +13,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -184,5 +186,20 @@ public class MainActivity extends BaseActivity implements HomeContract.IHomeView
     @Override
     public void OnBannerClick(int position) {
         Picture picture = homePresenter.getBannerPicList().get(position);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.acation_setting) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
