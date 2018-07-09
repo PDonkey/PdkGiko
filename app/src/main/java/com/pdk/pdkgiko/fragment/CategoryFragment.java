@@ -23,7 +23,7 @@ import java.util.List;
  * Created by uatql90533 on 2017/12/13.
  */
 
-public class CategoryFragment extends BaseFragment implements CategoryContract.ICategoryView, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemClickListener {
+public class CategoryFragment extends BaseFragment implements CategoryContract.ICategoryView, BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemClickListener {
     public static final String CATEGROY_NAME = "CategroyFragment.CATEGROY_NAME";
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
@@ -33,6 +33,11 @@ public class CategoryFragment extends BaseFragment implements CategoryContract.I
 
     private CategoryAdapter categoryAdapter;
     private List<CategoryResult.ResultsBean> resultBeanList = new ArrayList<>();
+
+    private static final int TOTAL_COUNTER = 10;
+
+    private static final int PAGE_SIZE = 6;
+    private int mCurrentCounter = 0;
 
     public static CategoryFragment newInstance(String categroyName) {
         CategoryFragment categoryFragment = new CategoryFragment();
@@ -59,9 +64,9 @@ public class CategoryFragment extends BaseFragment implements CategoryContract.I
 
         categoryAdapter = new CategoryAdapter(getActivity(), resultBeanList);
         recyclerView.setAdapter(categoryAdapter);
-        iCategoryPresenter.getCategroyItems(true);
-
-
+        iCategoryPresenter.subscribe();
+        categoryAdapter.setOnLoadMoreListener(this, recyclerView);
+        mCurrentCounter = categoryAdapter.getData().size();
     }
 
     @Override
@@ -74,6 +79,14 @@ public class CategoryFragment extends BaseFragment implements CategoryContract.I
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (iCategoryPresenter!=null) {
+            iCategoryPresenter.unSubscribe();
+        }
+    }
+
+    @Override
     public void setCategoryItems(List<CategoryResult.ResultsBean> data) {
         resultBeanList.clear();
         resultBeanList.addAll(data);
@@ -83,7 +96,8 @@ public class CategoryFragment extends BaseFragment implements CategoryContract.I
 
     @Override
     public void addCategoryItems(List<CategoryResult.ResultsBean> data) {
-
+        categoryAdapter.addData(data);
+        categoryAdapter.loadMoreComplete();
     }
 
     @Override
@@ -98,20 +112,15 @@ public class CategoryFragment extends BaseFragment implements CategoryContract.I
     }
 
     @Override
-    public void setLoding() {
-
-    }
-
-    @Override
     public String getCategoryName() {
-        String sss=categroyName;
-        Log.d("CategoryNmae---->",categroyName);
+        String sss = categroyName;
+        Log.d("CategoryNmae---->", categroyName);
         return this.categroyName;
     }
 
     @Override
     public void setNoMore() {
-
+        categoryAdapter.loadMoreEnd(true);
     }
 
     @Override
@@ -122,6 +131,16 @@ public class CategoryFragment extends BaseFragment implements CategoryContract.I
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
+
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        if (categoryAdapter.getData().size() < PAGE_SIZE) {
+            categoryAdapter.loadMoreEnd(true);
+        } else {
+            iCategoryPresenter.getCategroyItems(false);
+        }
 
     }
 }

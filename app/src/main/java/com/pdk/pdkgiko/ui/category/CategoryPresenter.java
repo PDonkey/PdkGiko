@@ -1,5 +1,6 @@
 package com.pdk.pdkgiko.ui.category;
 
+import com.google.gson.Gson;
 import com.pdk.pdkgiko.GlobalConfig;
 import com.pdk.pdkgiko.bean.CategoryResult;
 import com.pdk.pdkgiko.net.NetWork;
@@ -15,43 +16,12 @@ import io.reactivex.schedulers.Schedulers;
 public class CategoryPresenter implements CategoryContract.ICategoryPresenter {
     private CategoryContract.ICategoryView mICategoryView;
     private int mPage = 1;
+    private Disposable disposable = null;
 
     public CategoryPresenter(CategoryContract.ICategoryView iCategoryView) {
         mICategoryView = iCategoryView;
     }
-    /**
-     * All the life , she has seen
-     * All the meaner side of me
-     * They took away the prophet's dream
-     * For a profit on the street
-     * Now she's stronger than you know
-     * A heart of steel starts to grow
-     *
-     * All his life , he's been told
-     * He'll be nothing when he's old
-     * All the kick's and all the blows
-     * He will never let it show
-     * Cause he's stronger than you know
-     * A heart of steel starts to grow
-     * When you've been fighting for it all your life
-     * You've been struggling to make things right
-     * That's how a superhero learns to fly
-     * (Every day,every hour, Turn the pain into power)
-     * When you've been fighting for it all your life
-     * You've been working every day and night
-     * That's how a superhero learns to fly
-     * All the hurt , all the lies
-     * All the tears that they cry
-     * When the moment is just right
-     * You'll see fire in their eyes
-     * Cause they're stronger than you know
-     * A heart of steel starts to gorw
-     *
-     *
-     *
-     *
-     *
-     *
+     /*
      *
      */
 
@@ -59,6 +29,7 @@ public class CategoryPresenter implements CategoryContract.ICategoryPresenter {
     public void getCategroyItems(final boolean isRefresh) {
         if (isRefresh) {
             mPage = 1;
+            mICategoryView.showSwipeLoading();
         } else {
             mPage++;
         }
@@ -67,21 +38,25 @@ public class CategoryPresenter implements CategoryContract.ICategoryPresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<CategoryResult>() {
+
+
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        disposable = d;
                     }
 
                     @Override
                     public void onNext(CategoryResult categoryResult) {
+
                         if (categoryResult != null && !categoryResult.error) {
                             if (categoryResult.results == null || categoryResult.results.size() == 0) {
                                 mICategoryView.getCategoryItemsFail("获取数据为空！");
                             } else {
                                 if (isRefresh) {
+                                    String s = new Gson().toJson(categoryResult);
                                     mICategoryView.setCategoryItems(categoryResult.results);
                                     mICategoryView.hideSwipLoading();
-                                    mICategoryView.setLoding();
+//                                    mICategoryView.setLoding();
                                 } else {
                                     mICategoryView.addCategoryItems(categoryResult.results);
                                 }
@@ -106,17 +81,21 @@ public class CategoryPresenter implements CategoryContract.ICategoryPresenter {
                     public void onComplete() {
 
                     }
+
+
                 });
 
     }
 
     @Override
     public void subscribe() {
-
+        getCategroyItems(true);
     }
 
     @Override
     public void unSubscribe() {
-
+        if (disposable != null) {
+            disposable.dispose();
+        }
     }
 }

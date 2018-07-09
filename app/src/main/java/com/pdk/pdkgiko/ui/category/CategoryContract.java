@@ -22,7 +22,7 @@ public interface CategoryContract {
 
         void hideSwipLoading();
 
-        void setLoding();
+//        void setLoding();
 
         String getCategoryName();
 

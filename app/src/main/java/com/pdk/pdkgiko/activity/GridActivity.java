@@ -23,11 +23,8 @@ public class GridActivity extends BaseActivity implements GridGroupAdapter.DataC
     private DragGridView mGridView;
     private GridView mGridViewAll;
     private TextView mTextView;
-    //    private List<String> childList;
-//    private List<String> groupList;
     private List<GroupAppBean.AppBean> childList;
     private List<GroupAppBean.AppBean> groupList;
-    //    private List<GroupAppBean.AppBean> appBeanList;
     private GridChildAdapter gridChildAdapter;
     private GridGroupAdapter gridGroupAdapter;
 
@@ -50,9 +47,6 @@ public class GridActivity extends BaseActivity implements GridGroupAdapter.DataC
 //            groupList.add("item" + i);
             groupList.add(new GroupAppBean.AppBean(false, "item" + i));
         }
-//        for (int i = 0; i < 10; i++) {
-//            childList.add("item" + i);
-//        }
         gridChildAdapter = new GridChildAdapter(this, childList);
         gridGroupAdapter = new GridGroupAdapter(this, groupList, childList);
         mGridView.setAdapter(gridChildAdapter);
