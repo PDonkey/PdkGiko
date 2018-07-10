@@ -33,6 +33,7 @@ public class CategoryPresenter implements CategoryContract.ICategoryPresenter {
         } else {
             mPage++;
         }
+
         NetWork.getGankApi()
                 .getCategoryData(mICategoryView.getCategoryName(), GlobalConfig.CATEGORY_COUNT, mPage)
                 .subscribeOn(Schedulers.io())
