@@ -35,6 +35,7 @@
 
         </activity>
         <activity android:name=".activity.GridActivity"/>
+        <activity android:name=".ui.web.WebActivity"/>
 
         <service
             android:name="com.pdk.pdkgiko.service.MyService"

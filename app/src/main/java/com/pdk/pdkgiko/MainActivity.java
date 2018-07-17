@@ -29,6 +29,7 @@ import com.pdk.pdkgiko.bean.Picture;
 import com.pdk.pdkgiko.fragment.CategoryFragment;
 import com.pdk.pdkgiko.ui.home.HomeContract;
 import com.pdk.pdkgiko.ui.home.HomePresenter;
+import com.pdk.pdkgiko.ui.web.WebActivity;
 import com.pdk.pdkgiko.utils.AppScreenUtil;
 import com.pdk.pdkgiko.utils.MyClickListener;
 import com.pdk.pdkgiko.utils.StatusBarUtil;
@@ -172,6 +173,7 @@ public class MainActivity extends BaseActivity implements HomeContract.IHomeView
                     break;
                 case R.id.ll_nav_donation:
                     Snackbar.make(drawerLayout, "捐赠", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(MainActivity.this, WebActivity.class));
                     break;
                 case R.id.ll_nav_exit:
                     Snackbar.make(drawerLayout, "退出", Toast.LENGTH_LONG).show();

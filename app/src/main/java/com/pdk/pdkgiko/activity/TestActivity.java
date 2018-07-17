@@ -87,13 +87,13 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         bt_send_localbroadcast.setOnClickListener(this);
 
 
-
     }
 
     @Override
     protected void initData() {
         super.initData();
-        quickSort(arr, 0, arr.length - 1);
+//        quickSort(arr, 0, arr.length - 1);
+        selectSort();
         dbHelper = new MyDatabaseHelper(this, "BookStore.db", null, 2);
 
         intentFilter = new IntentFilter();
@@ -254,6 +254,36 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         quickSort(arr, j + 1, hight);
     }
 
+//    private int[] arr = {5, 1, 2, 5, 3, 4, 8, 2};
+
+    public void bubblingSort() {
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 1; j < arr.length - i; j++) {
+                if (arr[j - 1] > arr[j]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j - 1];
+                    arr[j - 1] = temp;
+                }
+            }
+        }
+    }
+
+    public void selectSort() {
+        for (int i = 0; i < arr.length; i++) {
+            int minIndex = i;
+            for (int j = i; j < arr.length - 1; j++) {
+                if (arr[minIndex] > arr[j + 1]) {
+                    minIndex = j + 1;
+                }
+            }
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+        int[] a = arr;
+        System.out.println();
+
+    }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public @interface MyTag {

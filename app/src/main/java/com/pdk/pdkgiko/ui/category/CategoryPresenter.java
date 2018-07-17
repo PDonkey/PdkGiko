@@ -7,6 +7,7 @@ import com.pdk.pdkgiko.net.NetWork;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -16,7 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 public class CategoryPresenter implements CategoryContract.ICategoryPresenter {
     private CategoryContract.ICategoryView mICategoryView;
     private int mPage = 1;
-    private Disposable disposable = null;
+    private CompositeDisposable disposable = new CompositeDisposable();
 
     public CategoryPresenter(CategoryContract.ICategoryView iCategoryView) {
         mICategoryView = iCategoryView;
@@ -43,7 +44,7 @@ public class CategoryPresenter implements CategoryContract.ICategoryPresenter {
 
                     @Override
                     public void onSubscribe(Disposable d) {
-                        disposable = d;
+                        disposable.add(d);
                     }
 
                     @Override
@@ -57,7 +58,6 @@ public class CategoryPresenter implements CategoryContract.ICategoryPresenter {
                                     String s = new Gson().toJson(categoryResult);
                                     mICategoryView.setCategoryItems(categoryResult.results);
                                     mICategoryView.hideSwipLoading();
-//                                    mICategoryView.setLoding();
                                 } else {
                                     mICategoryView.addCategoryItems(categoryResult.results);
                                 }
