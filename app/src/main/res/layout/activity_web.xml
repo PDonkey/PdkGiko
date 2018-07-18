@@ -1,63 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    android:layout_height="match_parent">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/blue"/>
     <com.pdk.pdkgiko.widegt.MyScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/ly_web"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:orientation="vertical">
 
-            <!--<WebView-->
-                <!--android:id="@+id/webview"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent">-->
-
-            <!--</WebView>-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:gravity="center"
                 android:background="@color/blue"
-                android:text="txt"/>
+                android:gravity="center"
+
+                android:text="随着ScrollView上滑逐渐变色的ToolBar"
+                android:textSize="20sp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:gravity="center"
-                android:text="txt"/>
+                android:text="带有回弹效果的ScrollView"
+                android:textSize="20sp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:gravity="center"
-                android:text="txt"/>
+                android:text="txt1" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:gravity="center"
-                android:text="txt"/>
+                android:text="txt2" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:gravity="center"
-                android:text="txt"/>
+                android:text="txt3" />
 
         </LinearLayout>
     </com.pdk.pdkgiko.widegt.MyScrollView>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/web_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/transparent"
+        android:fitsSystemWindows="true"
         app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        android:fitsSystemWindows="true">
+        app:contentInsetStart="0dp">
 
         <RelativeLayout
             android:id="@+id/rlayout_title"
@@ -68,17 +75,18 @@
                 android:id="@+id/tv_web_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
                 android:layout_centerInParent="true"
+                android:ellipsize="end"
                 android:maxLines="1"
-                android:text="TITLE"
-                android:textStyle="bold"
-                android:textSize="25sp"/>
+                android:text="TitleBar"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/category_text2"
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentBottom="true"
+                android:background="@color/category_text2" />
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>

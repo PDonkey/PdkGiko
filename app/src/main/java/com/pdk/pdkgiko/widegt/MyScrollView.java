@@ -85,7 +85,7 @@ public class MyScrollView extends ScrollView {
             case MotionEvent.ACTION_MOVE:
                 final float preY = y;// 按下时的y坐标
                 float nowY = ev.getY();// 时时y坐标
-                int deltaY = (int) (preY - nowY);// 滑动距离
+                int deltaY = (int) (preY - nowY)/4;// 滑动距离
                 if (!isCount) {
                     deltaY = 0; // 在这里要归0.
                 }

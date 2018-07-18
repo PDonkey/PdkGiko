@@ -50,15 +50,24 @@ public class WebActivity extends BaseActivity {
 
                 //变化率
                 float headerBarOffsetY = headerHeight - minHeaderHeight;//Toolbar与header高度的差值
-                float offset = 1 - Math.max((headerBarOffsetY - scrollY) / headerBarOffsetY, 0f);
+                if (scrollY == 0) {
+                    mToolbar.setBackgroundColor(Color.argb(0, 236, 114, 60));
+                } else if (scrollY > 0) {
+                    float offset = 1 - Math.max((headerBarOffsetY - scrollY) / headerBarOffsetY, 0f);
+                    //Toolbar背景色透明度
+                    mToolbar.setBackgroundColor(Color.argb((int) (offset * 255), 236, 114, 60));
+                } else {
+                    mToolbar.setBackgroundColor(Color.argb(0, 236, 114, 60));
+                }
 
-                //Toolbar背景色透明度
-                mToolbar.setBackgroundColor(Color.argb((int) (offset * 255), 236, 114, 60));
 
             }
         });
     }
 
+    /**
+     * 定义一个默认布局头高度和最低高度
+     */
     private void initMeasure() {
         headerHeight = getResources().getDimension(R.dimen.dp_200);
         minHeaderHeight = getResources().getDimension(R.dimen.abc_action_bar_default_height_material);
