@@ -10,18 +10,22 @@ import android.content.ServiceConnection;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.pdk.pdkgiko.R;
 import com.pdk.pdkgiko.base.BaseActivity;
 import com.pdk.pdkgiko.service.MyService;
 import com.pdk.pdkgiko.utils.MyDatabaseHelper;
+
+import org.w3c.dom.Node;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -59,7 +63,6 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         }
     };
 
-
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_test;
@@ -76,9 +79,9 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         bt_send_broadcast = (Button) findViewById(R.id.bt_send_boradcast);
         bt_send_localbroadcast = (Button) findViewById(R.id.bt_send_localbroadcast);
         bt_send_broadcast.setOnClickListener(this);
-//        startService.setOnClickListener(this);
-        startService.setOnClickListener(
-                v -> Toast.makeText(TestActivity.this, "lambda test", Toast.LENGTH_SHORT).show());
+        startService.setOnClickListener(this);
+//        startService.setOnClickListener(
+//                v -> Toast.makeText(TestActivity.this, "lambda test", Toast.LENGTH_SHORT).show());
         stopService.setOnClickListener(this);
         bindService.setOnClickListener(this);
         unbindService.setOnClickListener(this);
@@ -211,6 +214,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+
     class LocalReceiver extends BroadcastReceiver {
 
         @Override
@@ -285,6 +289,8 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public @interface MyTag {
         String name() default "李 四";//也可以指定默认值
@@ -342,16 +348,23 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
      * 因为这个方法中的代码都是在子线程中运行的所以不能进行更新UI的操作，如若想更新UI比如反馈当前任务进度，可以调用publishProgress(Progress...)方法来完成
      *
      * onProgressUpadte(Progress...) 当后台任务调用了publishProgress(Progress...)方法，
-     * onProgressUpdate(Progress...)方法很快就会被调用该方法中携带的参数是后台任务
+     * onProgressUpdate(Progress...)运行在主线程方法很快就会被调用该方法中携带的参数是后台任务
      * 传递过来的。在这个方法中中可以对UI进行操作，利用参数中的数值就可以对界面元素进行相应的更新
      *
-     * onPostExecute() 当后台任务执行完毕并通过return语句进行返回时，这个方法很快就会别调用。返回的数据会作为参数传递到此方法中，可以利用返回的数据进行一些UI操作
+     * onPostExecute() 运行在主线程当后台任务执行完毕并通过return语句进行返回时，这个方法很快就会别调用。返回的数据会作为参数传递到此方法中，可以利用返回的数据进行一些UI操作
      * 比如说：提醒任务的执行结果，以及关闭进度条对话框等
      *
      *
      *
      */
 
+    class MyTaak extends AsyncTask{
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            return null;
+        }
+    }
 
     /**
      * 线程池

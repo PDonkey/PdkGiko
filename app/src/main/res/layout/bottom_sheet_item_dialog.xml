@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/heColor"
+    android:orientation="vertical">
+    <TextView
+        style="@style/TextViewStyle"
+        android:text="item0"/>
+    <TextView
+        style="@style/TextViewStyle"
+        android:text="item1"/>
+    <TextView
+        style="@style/TextViewStyle"
+        android:text="item2"/>
+
+    <TextView
+        style="@style/TextViewStyle"
+        android:text="item3"/>
+    <TextView
+        style="@style/TextViewStyle"
+        android:text="item4"/>
+    <TextView
+        style="@style/TextViewStyle"
+        android:text="item5"/>
+
+</LinearLayout>

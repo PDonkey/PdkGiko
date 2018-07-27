@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="关于我们"
+            android:text="测试服务和数据库"
             android:textColor="@color/colorContent"
             android:textSize="15sp" />
 
@@ -115,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="问题反馈"
+            android:text="可拖动的GridView"
             android:textColor="@color/colorContent"
             android:textSize="15sp" />
 
@@ -141,7 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="捐赠开发者"
+            android:text="Toolbar"
             android:textColor="@color/colorContent"
             android:textSize="15sp" />
 

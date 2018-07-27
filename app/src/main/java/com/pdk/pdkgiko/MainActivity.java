@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
+import com.pdk.pdkgiko.activity.ScrollActivity;
 import com.pdk.pdkgiko.activity.GridActivity;
 import com.pdk.pdkgiko.activity.TestActivity;
 import com.pdk.pdkgiko.adapter.CommonViewPageAdapter;
@@ -29,7 +30,6 @@ import com.pdk.pdkgiko.bean.Picture;
 import com.pdk.pdkgiko.fragment.CategoryFragment;
 import com.pdk.pdkgiko.ui.home.HomeContract;
 import com.pdk.pdkgiko.ui.home.HomePresenter;
-import com.pdk.pdkgiko.ui.web.WebActivity;
 import com.pdk.pdkgiko.utils.AppScreenUtil;
 import com.pdk.pdkgiko.utils.MyClickListener;
 import com.pdk.pdkgiko.utils.StatusBarUtil;
@@ -165,15 +165,15 @@ public class MainActivity extends BaseActivity implements HomeContract.IHomeView
                     break;
                 case R.id.ll_nav_scan_address:
                     startActivity(new Intent(MainActivity.this, TestActivity.class));
-                    Snackbar.make(drawerLayout, "关于我们", Toast.LENGTH_LONG).show();
+                    Snackbar.make(drawerLayout, "服务", Toast.LENGTH_LONG).show();
                     break;
                 case R.id.ll_nav_deedback:
                     startActivity(new Intent(MainActivity.this, GridActivity.class));
-                    Snackbar.make(drawerLayout, "反馈", Toast.LENGTH_LONG).show();
+                    Snackbar.make(drawerLayout, "GridView", Toast.LENGTH_LONG).show();
                     break;
                 case R.id.ll_nav_donation:
-                    Snackbar.make(drawerLayout, "捐赠", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(MainActivity.this, WebActivity.class));
+                    Snackbar.make(drawerLayout, "toolbar", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(MainActivity.this, ScrollActivity.class));
                     break;
                 case R.id.ll_nav_exit:
                     Snackbar.make(drawerLayout, "退出", Toast.LENGTH_LONG).show();

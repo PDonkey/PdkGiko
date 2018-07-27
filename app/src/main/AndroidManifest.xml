@@ -36,6 +36,8 @@
         </activity>
         <activity android:name=".activity.GridActivity"/>
         <activity android:name=".ui.web.WebActivity"/>
+        <activity android:name=".activity.ScrollActivity"/>
+        <activity android:name=".activity.BehaviorSheetBottomActivity"/>
 
         <service
             android:name="com.pdk.pdkgiko.service.MyService"
