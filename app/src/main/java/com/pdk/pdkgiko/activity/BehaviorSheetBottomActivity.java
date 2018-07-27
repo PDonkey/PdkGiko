@@ -27,6 +27,7 @@ public class BehaviorSheetBottomActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+
         btBehaviorSheetBottom = (Button) findViewById(R.id.bt_behavior_sheet_bottom);
         btBehaviorBottomDialog = (Button) findViewById(R.id.bt_behavior_bottom_dialog);
         View behaviorView = findViewById(R.id.frame_view);
