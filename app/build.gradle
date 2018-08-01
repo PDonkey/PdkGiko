@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.mob.sdk'
 
 
 android {
     compileSdkVersion 25
     buildToolsVersion "26.0.2"
     defaultConfig {
-        applicationId "com.pdk.pdkdemo"
+        applicationId 'com.pdk.pdkgiko'
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
@@ -16,13 +17,21 @@ android {
 //        }
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            storeFile file('pdkgiko.jks')
+            storePassword 'pdkgiko5566'
+            keyAlias 'pdkgiko'
+            keyPassword 'pdkgiko5566'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
-
     sourceSets {
         main {
 //            if (isDebug.toBlooean()) {
@@ -42,6 +51,34 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+    productFlavors {
+    }
+}
+
+MobSDK{
+    appKey "2720409c9c9ed"
+    appSecret "1b06d52ad23959a0aa66e2bd6e5ba932"
+
+    ShareSDK {
+        //平台配置信息
+        devInfo {
+            SinaWeibo {
+                appKey "1934575055"
+                appSecret "51b1ff965a3e814be02ba6dd97603b55"
+                callbackUri "http://www.sharesdk.cn"
+                shareByAppClient false
+            }
+            Wechat {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+            QQ {
+                appId "1107390069"
+                appKey "jEIoplCvAyzVEYfm"
+                shareByAppClient true
+            }
+        }
+    }
 }
 
 dependencies {
@@ -50,29 +87,25 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-//    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    //    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-
-
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-//    compile 'com.jakewharton:butterknife:8.5.1'
-//    apt 'com.jakewharton:butterknife-compiler:8.5.1'
+    //    compile 'com.jakewharton:butterknife:8.5.1'
+    //    apt 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.38'
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.youth.banner:banner:1.4.10'
     compile 'com.github.Andy671:Dachshund-Tab-Layout:v0.3.0'
     //    annotationProcessor 'com.github.Andy671:Dachshund-Tab-Layout:v0.3.0'
     compile 'com.android.support:support-v4:25.3.1'
-
-
-        debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     compile project(':mylibrary')

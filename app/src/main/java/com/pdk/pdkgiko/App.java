@@ -3,6 +3,7 @@ package com.pdk.pdkgiko;
 import android.app.Activity;
 import android.app.Application;
 
+import com.mob.MobSDK;
 import com.pdk.pdkgiko.utils.Utils;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -39,6 +40,7 @@ public class App extends Application{
 //        BGASwipeBackManager.getInstance().init(this);
 //        ConfigManage.INSTANCE.initConfig(this);
         Utils.init(this);
+        MobSDK.init(this);
     }
 
     public void addActivity(Activity activity) {

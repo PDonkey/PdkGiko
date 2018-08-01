@@ -21,6 +21,7 @@ public class CategoryAdapter extends BaseQuickAdapter<CategoryResult.ResultsBean
     public CategoryAdapter(Context context, @Nullable List<CategoryResult.ResultsBean> data) {
         super(R.layout.item_category, data);
         this.mContext = context;
+        this.resultList=data;
     }
 
     @Override

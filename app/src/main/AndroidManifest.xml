@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.pdk.pdkgiko">
     <!-- 网络访问权限申明 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,8 +17,9 @@
 
     <application
         android:name="com.pdk.pdkgiko.App"
+        tools:replace="android:name"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/pdk_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -35,7 +37,10 @@
 
         </activity>
         <activity android:name=".activity.GridActivity"/>
-        <activity android:name=".ui.web.WebActivity"/>
+        <activity android:name=".ui.web.WebActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity android:name=".activity.ScrollActivity"/>
         <activity android:name=".activity.BehaviorSheetBottomActivity"/>
 

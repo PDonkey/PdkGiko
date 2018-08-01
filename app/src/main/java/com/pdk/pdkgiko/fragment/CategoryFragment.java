@@ -1,5 +1,6 @@
 package com.pdk.pdkgiko.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,12 +16,13 @@ import com.pdk.pdkgiko.base.BaseFragment;
 import com.pdk.pdkgiko.bean.CategoryResult;
 import com.pdk.pdkgiko.ui.category.CategoryContract;
 import com.pdk.pdkgiko.ui.category.CategoryPresenter;
+import com.pdk.pdkgiko.ui.web.WebActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by uatql90533 on 2017/12/13.
+ * Created by lqf on 2018/07/13.
  */
 
 public class CategoryFragment extends BaseFragment implements CategoryContract.ICategoryView, BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemClickListener {
@@ -63,6 +65,7 @@ public class CategoryFragment extends BaseFragment implements CategoryContract.I
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         categoryAdapter = new CategoryAdapter(getActivity(), resultBeanList);
+        categoryAdapter.setOnItemClickListener(this);
         recyclerView.setAdapter(categoryAdapter);
         iCategoryPresenter.subscribe();
         categoryAdapter.setOnLoadMoreListener(this, recyclerView);
@@ -81,7 +84,7 @@ public class CategoryFragment extends BaseFragment implements CategoryContract.I
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (iCategoryPresenter!=null) {
+        if (iCategoryPresenter != null) {
             iCategoryPresenter.unSubscribe();
         }
     }
@@ -130,7 +133,10 @@ public class CategoryFragment extends BaseFragment implements CategoryContract.I
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        Intent intent = new Intent(getActivity(), WebActivity.class);
+        intent.putExtra("WebTitle", resultBeanList.get(position).desc);
+        intent.putExtra("WebUrl", resultBeanList.get(position).url);
+        startActivity(intent);
 
     }
 

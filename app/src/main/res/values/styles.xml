@@ -12,9 +12,9 @@
 
 
     <style name="MyThemeOrange" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/heColor</item>
-        <item name="colorPrimaryDark">@color/heColor</item>
-        <item name="colorAccent">@color/heColor</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/blue</item>
 
         <!--<item name="android:windowBackground">@android:color/transparent</item>-->
         <item name="android:windowIsTranslucent">true</item>

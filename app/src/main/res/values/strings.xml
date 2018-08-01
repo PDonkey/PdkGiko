@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">PdkGiko</string>
-    <string name="exit_toast">PdkDemo</string>
+    <string name="exit_toast">再按一次退出应用</string>
     <string name="up_for_cancel">手指上滑，取消发送</string>
     <string name="want_to_cancle">松开手指，取消发送</string>
     <string name="time_too_short">录音时间过短</string>

@@ -25,7 +25,7 @@
             android:layout_marginRight="10dp"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
-            android:src="@drawable/homepage_header" />
+            android:src="@mipmap/image_default" />
 
         <RelativeLayout
             android:layout_width="0dp"
