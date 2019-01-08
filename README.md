@@ -1,2 +1,6 @@
 # PdkGiko
-#总算写了点东西进去，加了个弹性的scrollview
+弹性的scrollview
+
+干货可以查看
+
+集成分享功能待完善
